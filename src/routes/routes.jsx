@@ -21,7 +21,7 @@ const routes = [
     {
         path: "**",
         component: NotfoundPage
-    },
+    }
 ];
 
 export default routes;

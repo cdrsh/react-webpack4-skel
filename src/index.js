@@ -19,21 +19,18 @@ import { Provider } from "react-redux";
 import { AppContainer } from "react-hot-loader";
 import configureStore from "./store/configureStore";
 
-
-
-
 //Create store
 const { store, history } = configureStore();
 
 render(
     <I18nextProvider i18n={i18n}>
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <AppContainer>
-                <AppComponent history={history} />
-            </AppContainer>
-        </ConnectedRouter>
-    </Provider>
+        <Provider store={store}>
+            <ConnectedRouter history={history}>
+                <AppContainer>
+                    <AppComponent history={history} />
+                </AppContainer>
+            </ConnectedRouter>
+        </Provider>
     </I18nextProvider>,
     document.getElementById("root")
 );
