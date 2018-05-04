@@ -1,9 +1,9 @@
 "use strict";
 
-import Page1 from "../jsx/pages/page1.jsx";
-import Page2 from "../jsx/pages/page2.jsx";
-import Page3 from "../jsx/pages/page3.jsx";
-import NotfoundPage from "../jsx/pages/notfound.jsx";
+import Page1 from "../jsx/pages/page1";
+import Page2 from "../jsx/pages/page2";
+import Page3 from "../jsx/pages/page3";
+import NotfoundPage from "../jsx/pages/notfound";
 
 const routes = [
     {
@@ -21,7 +21,7 @@ const routes = [
     {
         path: "**",
         component: NotfoundPage
-    }
+    },
 ];
 
 export default routes;

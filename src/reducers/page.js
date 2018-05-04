@@ -11,6 +11,7 @@ const initialState = {
     fetching: false
 };
 
+
 export default function page(state = initialState, action) {
     switch (action.type) {
         case GET_DATA_REQUEST:

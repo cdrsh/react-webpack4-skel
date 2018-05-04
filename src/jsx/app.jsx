@@ -15,31 +15,23 @@ import {
     Grid
 } from "reactstrap";
 import EventEmitter from "wolfy87-eventemitter";
-import {
-    BrowserRouter,
-    Route,
-    Link,
-    NavLink,
-    Switch,
-    Redirect
-} from "react-router-dom";
+import { BrowserRouter, Route, Link, NavLink, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { bindActionCreators } from "redux";
 import PropTypes from "prop-types";
 //import loDash from "lodash";
-import loDash from "lodash/array";
+import loDash from 'lodash/array';
 
-import Moment from "react-moment";
-import "moment-timezone";
+import Moment from 'react-moment';
+import 'moment-timezone';
 
-import {
-    CSSTransition,
-    Transition,
-    TransitionGroup
-} from "react-transition-group";
+import {CSSTransition,
+        Transition,
+        TransitionGroup} from 'react-transition-group';
 
 import { translate, Trans } from "react-i18next";
+
 
 import routes from "../routes/routes";
 const RouteWithSubRoutes = route => (
@@ -51,8 +43,8 @@ const RouteWithSubRoutes = route => (
 
 import { getData } from "../reducers/actions";
 
-import Formsy from "formsy-react";
-import MyInput from "./components/myInput";
+import Formsy from 'formsy-react';
+import MyInput from './components/myInput';
 
 class AppComponent extends React.Component {
     constructor(props) {
@@ -60,12 +52,12 @@ class AppComponent extends React.Component {
         this.onOffButton = this.onOffButton.bind(this);
         this.state = {
             canSubmit: false,
-            arr: [
-                { txt: "item1", kee: "key1" },
-                { txt: "item2", kee: "key2" },
-                { txt: "item3", kee: "key3" }
+            arr:[
+                {txt:'item1',kee:"key1"},
+                {txt:'item2',kee:"key2"},
+                {txt:'item3',kee:"key3"},
             ],
-            itemTxt: ""
+            itemTxt:''
         };
 
         //Events example
@@ -97,6 +89,7 @@ class AppComponent extends React.Component {
         console.log(x); // 1
         console.log(y); // 2
         console.log(z); // { a: 3, b: 4 }
+
     }
 
     //button change state
@@ -105,23 +98,23 @@ class AppComponent extends React.Component {
     }
 
     //add item
-    onAddItem = () => {
-        this.setState({
-            arr: [
+    onAddItem=()=>{
+        this.setState({ 
+            arr:[
                 ...this.state.arr,
                 {
-                    txt: this.state.itemTxt,
-                    kee: "key" + Math.random() * (1000 - 10) + 10
+                    txt:this.state.itemTxt,
+                    kee:"key"+Math.random()*(1000-10)+10
                 }
             ],
-            itemTxt: ""
+            itemTxt:''
         });
-    };
+    }
 
     //item text change
-    onItemTxtChange = e => {
-        this.setState({ itemTxt: e.target.value });
-    };
+    onItemTxtChange=(e)=>{
+        this.setState({itemTxt:e.target.value});
+    }
 
     //getData from backend
     getData = () => {
@@ -129,26 +122,27 @@ class AppComponent extends React.Component {
     };
 
     //formsy example
-    submit = data => {
+    submit=(data)=> {
         alert(JSON.stringify(data, null, 4));
-    };
-
-    enableButton = () => {
+    }
+    
+    enableButton=()=> {
         this.setState({ canSubmit: true });
-    };
-
-    disableButton = () => {
+    }
+    
+    disableButton=()=> {
         this.setState({ canSubmit: false });
-    };
+    }
 
     render() {
-        let lodash = loDash.fill(Array(3), 2);
 
-        const dateToFormat = "1976-04-19T12:59-0500";
+        let lodash=loDash.fill(Array(3), 2);
+
+        const dateToFormat = '1976-04-19T12:59-0500';
         //const dateToFormat = new Date('1976-04-19T12:59-0500');
         const unixTimestamp = 198884740;
-
-        const { arr } = this.state;
+        
+        const {arr} = this.state;
 
         //i18n
         const { t, i18n } = this.props;
@@ -163,6 +157,7 @@ class AppComponent extends React.Component {
                 <button onClick={() => changeLanguage("en")}>en</button>
                 <Trans>Text1</Trans>
                 <Trans i18nKey="feed_no_change">Text2</Trans>
+
                 <div className="alert alert-success" role="alert">
                     <h4>Redux, axios, redux-thunk:</h4>
                     <br />
@@ -179,10 +174,14 @@ class AppComponent extends React.Component {
                     </Button>
                     <br />
                 </div>
+
+
                 <h4 className="postcss-style">Image:</h4>
                 <div className="alert alert-success" role="alert">
                     <img src="images/logo.png" className="logo" />
                 </div>
+
+
                 <h4>Styles:</h4>
                 <h4 className="red-css">Content less import css</h4>
                 <h4 className="green-less">Content less</h4>
@@ -191,6 +190,7 @@ class AppComponent extends React.Component {
                 <h4 className="orange-scss">Content scss</h4>
                 <h4 className="blue-scss">Content scss-import</h4>
                 <hr />
+
                 <h4>Screen sizes:</h4>
                 <div className="alert alert-primary" role="alert">
                     <div>
@@ -209,6 +209,7 @@ class AppComponent extends React.Component {
                 </div>
                 <hr />
                 <br />
+
                 <h4>Change component state:</h4>
                 <br />
                 <Button color="info" size="sm" onClick={this.onOffButton}>
@@ -217,74 +218,61 @@ class AppComponent extends React.Component {
                 </Button>
                 <hr />
                 <br />
+
+                
                 <h4>Transition group animation:</h4>
                 <InputGroup>
                     <InputGroupAddon>
                         <Button color="info" onClick={this.onAddItem}>
-                            <span className="fa fa-paper-plane" />&nbsp; Add
-                            Item
+                            <span className="fa fa-paper-plane" />&nbsp; Add Item
                         </Button>
                     </InputGroupAddon>
-                    <Input
-                        value={this.state.itemTxt}
-                        onChange={this.onItemTxtChange}
-                    />
+                    <Input 
+                        value={this.state.itemTxt} 
+                        onChange={this.onItemTxtChange}/>
                 </InputGroup>
+
                 Items (TransitionGroup):
                 <div className="alert alert-primary" role="alert">
-                    <TransitionGroup>
-                        {arr.map(itm => (
+                    <TransitionGroup>{
+                        arr.map((itm)=>(
                             <CSSTransition
                                 timeout={500}
                                 classNames="star"
                                 key={itm.kee}
-                                onEntered={par => {
-                                    console.log(
-                                        "Callback onEntered CSSTransition"
-                                    );
+                                onEntered={(par) => {
+                                    console.log("Callback onEntered CSSTransition");
                                 }}
                             >
                                 <div>{itm.txt}</div>
                             </CSSTransition>
-                        ))}
+                        ))
+                    }
                     </TransitionGroup>
                 </div>
+                
+
                 <h4>Pages links router example:</h4>
                 <br />
                 <div className="list-group">
-                    <NavLink
-                        to="/page1"
-                        className="list-group-item list-group-item-action"
-                        activeClassName="active"
-                    >
+                    <NavLink to="/page1" className="list-group-item list-group-item-action" activeClassName="active">
                         <span className="fa fa-amazon" />&nbsp;Page1
                     </NavLink>
                     <br />
-                    <NavLink
-                        to="/page2/123"
-                        className="list-group-item list-group-item-action"
+                    <NavLink to="/page2/123" className="list-group-item list-group-item-action" 
                         activeClassName="active1"
                         activeStyle={{
-                            fontWeight: "bold",
-                            color: "red"
-                        }}
-                    >
+                            fontWeight: 'bold',
+                            color: 'red'
+                        }}>
                         <span className="fa fa-android" />&nbsp;Page2
                     </NavLink>
                     <br />
-                    <NavLink
-                        to="/page3"
-                        className="list-group-item list-group-item-action"
-                        activeClassName="active"
-                    >
+                    <NavLink to="/page3" className="list-group-item list-group-item-action" activeClassName="active">
                         <span className="fa fa-apple" />&nbsp;Page3
                     </NavLink>
                     <br />
-                    <NavLink
-                        to="/page4"
-                        className="list-group-item list-group-item-action"
-                        activeClassName="active"
-                    >
+                    <NavLink to="/page4" className="list-group-item list-group-item-action" activeClassName="active">
                         <span className="fa fa-newspaper-o" />&nbsp;Page4
                     </NavLink>
                 </div>
@@ -299,65 +287,65 @@ class AppComponent extends React.Component {
                     </Switch>
                 </div>
                 <br />
+
                 <h4>Flag icon css:</h4>
-                <span className="flag-icon flag-icon-gr" />
+                <span className="flag-icon flag-icon-gr"></span>
                 <br />
-                <span className="flag-icon flag-icon-de" />
+                <span className="flag-icon flag-icon-de"></span>
                 <br />
-                <span className="flag-icon flag-icon-us" />
+                <span className="flag-icon flag-icon-us"></span>
                 <br />
-                <hr />
+                <hr/>
+
                 <h4>Lodash sample:{lodash}</h4>
                 <br />
+
                 <h4>React-Moment:</h4>
-                <Moment format="DD.MM.YYYY HH:mm" tz="America/Los_Angeles">
-                    {dateToFormat}
-                </Moment>
+                <Moment  format="DD.MM.YYYY HH:mm" tz="America/Los_Angeles">{dateToFormat}</Moment>
                 <br />
-                <Moment locale="de" format="DD.MM.YYYY HH:mm">
-                    {dateToFormat}
-                </Moment>
+                <Moment locale="de" format="DD.MM.YYYY HH:mm">{dateToFormat}</Moment>
                 <br />
-                <Moment unix tz="America/Los_Angeles">
-                    {unixTimestamp}
-                </Moment>
+                <Moment unix tz="America/Los_Angeles">{unixTimestamp}</Moment>
                 <br />
-                <Moment
-                    locale="de"
-                    format="DD.MM.YYYY HH:mm"
-                    onChange={val => {
-                        console.log(val);
-                    }}
+                <Moment 
+                locale="de" 
+                format="DD.MM.YYYY HH:mm"
+                onChange={(val) => { console.log(val); }}
                 >
                     {dateToFormat}
                 </Moment>
                 <br />
                 <br />
+
                 <h4>Formsy:</h4>
-                <Formsy
-                    onSubmit={this.submit}
-                    onValid={this.enableButton}
-                    onInvalid={this.disableButton}
+                <Formsy 
+                    onSubmit={this.submit} 
+                    onValid={this.enableButton} 
+                    onInvalid={this.disableButton} 
                 >
-                    <MyInput
-                        name="email"
-                        title="Email"
-                        validations="isEmail"
-                        validationError="This is not a valid email"
-                        required
+                    <MyInput 
+                        name="email" 
+                        title="Email" 
+                        validations="isEmail" 
+                        validationError="This is not a valid email" 
+                        required 
                     />
-                    <MyInput
-                        name="password"
-                        title="Password"
-                        type="password"
-                        required
+                    <MyInput 
+                        name="password" 
+                        title="Password" 
+                        type="password" 
+                        required 
                     />
-                    <button type="submit" disabled={!this.state.canSubmit}>
+                    <button 
+                        type="submit" 
+                        disabled={!this.state.canSubmit}
+                    >
                         Submit
                     </button>
                 </Formsy>
                 <br />
                 <br />
+                
             </div>
         );
     }
@@ -383,6 +371,8 @@ AppComponent.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export default translate("translations")(
-    withRouter(connect(mapStateToProps, mapDispatchToProps)(AppComponent))
+
+
+export default translate("translations")(withRouter(
+    connect(mapStateToProps, mapDispatchToProps)(AppComponent))
 );
